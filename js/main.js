@@ -6,7 +6,7 @@ const userName = document.querySelector('.user-name');
 const logInForm = document.getElementById('logInForm');
 const inputLogin = document.getElementById('login');
 const inputPassword = document.getElementById('password');
-
+const errorMesageLogin = document.querySelector('.error-message')
 
 const login = (user) => {
    buttonAuth.style.display = 'none';
@@ -38,17 +38,24 @@ buttonOut.addEventListener('click', () => {
 
 buttonCloseAuth.addEventListener('click', () => {
    modalAuth.style.display = 'none';
+   errorMesageLogin.style.visibility = 'hidden';
 })
 
 logInForm.addEventListener('submit', (event) => {
    event.preventDefault();
-
    const user = {
       login: inputLogin.value,
       password: inputPassword.value
    }
-   localStorage.setItem('user', JSON.stringify(user));
-   login(user);
+   if (inputLogin.value == '') {
+      errorMesageLogin.style.visibility = 'visible';
+      errorMesageLogin.textContent = 'Введите логин!';
+   }
+   else {
+      localStorage.setItem('user', JSON.stringify(user));
+      login(user);
+   }
+
 })
 
 if (localStorage.getItem('user')) {
