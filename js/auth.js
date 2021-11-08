@@ -7,10 +7,12 @@ const logInForm = document.getElementById("logInForm");
 const inputLogin = document.getElementById("login");
 const inputPassword = document.getElementById("password");
 const errorMesageLogin = document.querySelector(".error-message");
+const buttonCart = document.querySelector(".button-cart");
 
 const login = (user) => {
   buttonAuth.style.display = "none";
   buttonOut.style.display = "flex";
+  buttonCart.style.display = "flex";
 
   userName.style.display = "flex";
   userName.textContent = user.login;
@@ -22,12 +24,14 @@ const login = (user) => {
 const logout = (user) => {
   buttonAuth.style.display = "flex";
   buttonOut.style.display = "none";
+  buttonCart.style.display = "none";
 
   userName.style.display = "none";
   userName.textContent = "";
 
   localStorage.removeItem("user");
   //return false;
+  window.location.href = "/index.html";
 };
 
 buttonAuth.addEventListener("click", () => {
