@@ -7,6 +7,12 @@ const cart = () => {
   const clearCartButton = modalCart.querySelector(".clear-cart");
   const modalPriceTag = modalCart.querySelector(".modal-pricetag");
 
+  const allPrice = (arr) => {
+    let sum = arr.reduce((sum, { price, count }) => sum + price * count, 0);
+    modalPriceTag.innerHTML = "";
+    modalPriceTag.innerHTML = `${sum} ₽`;
+  };
+
   const resetCart = () => {
     body.innerHTML = "";
     localStorage.removeItem("cart");
@@ -44,6 +50,7 @@ const cart = () => {
   const renderItems = (data) => {
     body.innerHTML = "";
     data.forEach(({ name, price, id, count }) => {
+      allPrice(data);
       const newCartItem = document.createElement("div");
       newCartItem.classList.add("food-row");
       newCartItem.innerHTML = `<span class="food-name">${name}</span>
